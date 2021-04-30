@@ -4,6 +4,11 @@ import '../../../shared/styles.css';
 import eventServices from "../../../services/event-services";
 import {useHistory} from "react-router";
 
+import {toast} from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
 const Create = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -16,7 +21,11 @@ const Create = () => {
         e.preventDefault();
 
         eventServices.create({ name, description, location, date, imageURL })
-            .then(() => history.push('/'))
+            .then(() => 
+                toast.success('Event Created !!', {autoClose:3000, style: ({fontSize: "15px" })}),
+                history.push('/'),
+                
+            )
             .catch(err => {
                 console.log(err);
             })
@@ -45,53 +54,79 @@ const Create = () => {
     return (
         <form className="Create" onSubmit={handleSubmit}>
             <p className="title">Create your event</p>
-            <div className="input">
-                <input
+            <div>
+            <TextField
+                    label="Name"
+                    id="outlined-size-normal"
+                    variant="outlined"
                     type="text"
                     name="name"
                     placeholder="Name"
                     onChange={onChangeName}
                     value={name}
+                    required
+                    style={{width: "400px", margin: "10px"}}
                 />
-            </div>
-            <div className="input">
-                <input
-                    type="text"
-                    name="description"
-                    placeholder="Description"
-                    onChange={onChangeDescription}
-                    value={description}
-                />
-            </div>
-            <div className="input">
-                <input
-                    type="date"
-                    name="date"
-                    min="01/01/2021"
-                    max="01/01/2030"
-                    onChange={onChangeDate}
-                    value={date}
-                />
-            </div>
-            <div className="input">
-                <input
-                    type="text"
-                    name="imageURL"
-                    placeholder="imageURL"
-                    onChange={onChangeImageURL}
-                    value={imageURL}
-                />
-            </div>
-            <div className="input">
-                <input
-                    type="text"
-                    name="location"
-                    placeholder="Location"
-                    onChange={onChangeLocation}
-                    value={location}
-                />
-            </div>
-            <button type="submit" className="btn">CREATE</button>
+                </div>
+
+                <div>
+                <TextField
+                        label="Description"
+                        id="outlined-size-normal"
+                        variant="outlined"
+                        type="text"
+                        name="description"
+                        placeholder="Description"
+                        onChange={onChangeDescription}
+                        value={description}
+                        required
+                        style={{width: "400px", margin: "10px"}}
+                    />
+                </div>
+                <div>
+                <TextField
+                        // label="Date"
+                        id="outlined-size-normal"
+                        variant="outlined"
+                        type="date"
+                        name="date"
+                        min="01/01/2021"
+                        max="01/01/2030"
+                        onChange={onChangeDate}
+                        value={date}
+                        required
+                        style={{width: "400px", margin: "10px"}}
+                    />
+                </div>
+                <div>
+                <TextField
+                        // label="Date"
+                        id="outlined-size-normal"
+                        variant="outlined"
+                        type="text"
+                        name="imageURL"
+                        placeholder="imageURL"
+                        onChange={onChangeImageURL}
+                        value={imageURL}
+                        required
+                        style={{width: "400px", margin: "10px"}}
+                    />
+                </div>
+                <div>
+                <TextField
+                        // label="Date"
+                        id="outlined-size-normal"
+                        variant="outlined"
+                        type="text"
+                        name="location"
+                        placeholder="Location"
+                        onChange={onChangeLocation}
+                        value={location}
+                        required
+                        style={{width: "400px", margin: "10px"}}
+                    />
+                </div>
+                <Button type="submit" variant="contained" color="primary" style={{margin: "20px"}}>CREATE</Button>
         </form>
     )
 }

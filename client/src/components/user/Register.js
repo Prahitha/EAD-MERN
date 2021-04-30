@@ -1,4 +1,8 @@
 import React from "react";
+import {toast} from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 import "../../shared/styles.css";
 
@@ -47,6 +51,7 @@ class Register extends React.Component {
         const {firstName, lastName, username, password, rePassword} = this.state;
 
         this.props.register({firstName, lastName, username, password}, this.props.history);
+        toast.success('Registration Successful !!', {autoClose:3000, style: ({fontSize: "15px" })});
     }
 
     render() {
@@ -54,53 +59,78 @@ class Register extends React.Component {
 
         return (
             <form className="Register" onSubmit={this.handleSubmit}>
-                <p className="title">Sign In</p>
+                <p className="title">REGISTER</p>
                 <div className="input">
-                    <input
-                        type="text"
-                        name="firstName"
-                        placeholder="First Name"
-                        onChange={this.onChangeFirstName}
-                        value={firstName}
-                    />
+                <TextField
+                    label="FIrst Name"
+                    id="outlined-size-normal"
+                    variant="outlined"
+                    type="text"
+                    name="firstName"
+                    placeholder="First Name"
+                    onChange={this.onChangeFirstName}
+                    value={firstName}
+                    required
+                    style={{width: "400px", margin: "10px"}}
+                />
                 </div>
                 <div className="input">
-                    <input
-                        type="text"
-                        name="lastName"
-                        placeholder="Last Name"
-                        onChange={this.onChangeLastName}
-                        value={lastName}
-                    />
+                <TextField
+                    label="Last Name"
+                    id="outlined-size-normal"
+                    variant="outlined"
+                    type="text"
+                    name="lastName"
+                    placeholder="Last Name"
+                    onChange={this.onChangeLastName}
+                    value={lastName}
+                    required
+                    style={{width: "400px"}}
+                />
                 </div>
                 <div className="input">
-                    <input
-                        type="text"
-                        name="username"
-                        placeholder="Username"
-                        onChange={this.onChangeUsername}
-                        value={username}
-                    />
+                <TextField
+                    label="Username"
+                    id="outlined-size-normal"
+                    name="username"
+                    variant="outlined"
+                    placeholder="Username"
+                    onChange={this.onChangeUsername}
+                    value={username}
+                    required
+                    style={{width: "400px", margin: "10px"}}
+                />
                 </div>
                 <div className="input">
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        onChange={this.onChangePassword}
-                        value={password}
-                    />
+                <TextField
+                    label="Password"
+                    id="outlined-size-normal"
+                    variant="outlined"
+                    value={username}
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={this.onChangePassword}
+                    value={password}
+                    required
+                    style={{width: "400px", margin: "10px"}}
+                />
                 </div>
                 <div className="input">
-                    <input
-                        type="password"
-                        name="rePassword"
-                        placeholder="Repeat Password"
-                        onChange={this.onChangeRePassword}
-                        value={rePassword}
-                    />
+                <TextField
+                    label="Repeat Password"
+                    id="outlined-size-normal"
+                    variant="outlined"
+                    type="password"
+                    name="rePassword"
+                    placeholder="Repeat Password"
+                    onChange={this.onChangeRePassword}
+                    value={rePassword}
+                    required
+                    style={{width: "400px", margin: "10px"}}
+                />
                 </div>
-                <button type="submit" className="btn">SIGN IN</button>
+                <Button type="submit" variant="contained" color="primary" style={{margin: "20px"}}>REGISTER</Button>
             </form>
         )
     }

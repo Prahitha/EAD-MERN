@@ -1,9 +1,13 @@
 import React, {useState, useEffect} from "react";
 import {useHistory } from "react-router-dom";
-
+import {toast} from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
+import M from 'materialize-css';
 import "./Event.css";
 import eventServices from "../../../services/event-services";
 import isLoggedIn from "../../../utils/auth";
+
+toast.configure();
 
 const Event = ({event, isAdmin, isLiked, isRegistered, isLoggedIn}) => {
     const [likeState, setLikeState] = useState(isLiked);
@@ -49,8 +53,11 @@ const Event = ({event, isAdmin, isLiked, isRegistered, isLoggedIn}) => {
     const registerUser = (e) => {
         const id = e.currentTarget.id;
         eventServices.registeruser(id).then(() => {
+            toast.success('Registration Successful !!', {autoClose:3000, style: ({fontSize: "15px" })})
+            // M.toast({html:"signedin success",classes:"#43a047 green darken-1"})
             history.push('/');
             setRegisterState(true);
+            
         }).catch(err => console.log(err));
     }
 
@@ -59,6 +66,7 @@ const Event = ({event, isAdmin, isLiked, isRegistered, isLoggedIn}) => {
         eventServices.unregisteruser(id).then(() => {
             history.push('/');
             setRegisterState(false);
+            toast.warning('UnRegistration Successful !!', {autoClose:3000, style: ({fontSize: "15px" })})
         }).catch(err => console.log(err));
     }
 
@@ -88,7 +96,7 @@ const Event = ({event, isAdmin, isLiked, isRegistered, isLoggedIn}) => {
             }
             <p className="name">{event.name}</p>
             <p className="description">{event.description}</p>
-            { event.admin ?
+            { event.admin.firstName ?
                 <div className="creator">
                     <span>Creator: </span>
                     {event.admin.firstName + ' ' + event.admin.lastName}
@@ -96,7 +104,7 @@ const Event = ({event, isAdmin, isLiked, isRegistered, isLoggedIn}) => {
             }
                 {!isAdmin ?
                     <div>
-                        {event.admin ?
+                        {event.admin.firstName ?
                 <div className="likes">
                 {likeState ?
                     <i className="far fa-thumbs-up blue" id={event._id} onClick={hitDislike}></i> :

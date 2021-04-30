@@ -1,4 +1,8 @@
 import React from "react";
+import {toast} from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 import "../../shared/styles.css";
 
@@ -29,6 +33,7 @@ class Login extends React.Component {
         const {username, password} = this.state;
 
         this.props.login({username, password}, this.props.history);
+        toast.success('Logged In', {autoClose:3000, style: ({fontSize: "15px" })})
     }
 
     render() {
@@ -36,26 +41,36 @@ class Login extends React.Component {
 
         return (
             <form className="Login" onSubmit={this.handleSubmit}>
-                <h2 className="title">Sign Up</h2>
+                <h2 className="title">LOGIN</h2>
                 <div className="input">
-                    <input
-                        type="text"
-                        name="username"
-                        placeholder="Username"
-                        onChange={this.onChangeUsername}
-                        value={username}
-                    />
+                <TextField
+                    label="Username"
+                    id="outlined-size-normal"
+                    name="username"
+                    variant="outlined"
+                    placeholder="Username"
+                    onChange={this.onChangeUsername}
+                    value={username}
+                    required
+                    style={{width: "400px", margin: "10px"}}
+                />
                 </div>
                 <div className="input">
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        onChange={this.onChangePassword}
-                        value={password}
-                    />
+                <TextField
+                    label="Password"
+                    id="outlined-size-normal"
+                    variant="outlined"
+                    value={username}
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    onChange={this.onChangePassword}
+                    value={password}
+                    required
+                    style={{width: "400px"}}
+                />
                 </div>
-                <button type="submit" className="btn">SIGN UP</button>
+                <Button type="submit" variant="contained" color="primary" style={{margin: "20px"}}>LOGIN</Button>
             </form>
         )
     }
