@@ -41,7 +41,7 @@ const Home = ({isLoggedIn}) => {
                     <Event
                         isAdmin={false}
                         isLiked={false}
-                        isRegistered={isRegistered(event)}
+                        isRegistered={false}
                         key={event._id}
                         event={event}
                         isLoggedIn={false}
