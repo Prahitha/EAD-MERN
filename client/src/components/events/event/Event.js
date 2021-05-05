@@ -13,11 +13,12 @@ const Event = ({event, isAdmin, isLiked, isRegistered, isLoggedIn}) => {
     const [likeState, setLikeState] = useState(isLiked);
     const [registerState, setRegisterState] = useState(isRegistered);
     const [events, setEvents] = useState([]);
+
     // const event1 = eventServices.details(event);
     
 
     useEffect(() => {
-        console.log(isRegistered + " " + typeof(event1) + event + "  " + event.name);
+        console.log(isRegistered + " " + typeof(event1) + {event} + "  " + event.name);
         if (isLoggedIn) {
             eventServices.get().then(ev => {
                 setEvents(ev);
@@ -29,6 +30,7 @@ const Event = ({event, isAdmin, isLiked, isRegistered, isLoggedIn}) => {
         }
     });
     const history = useHistory();
+
 
     const handleEdit = (e) => {
         const id = e.currentTarget.id;
@@ -111,7 +113,7 @@ const Event = ({event, isAdmin, isLiked, isRegistered, isLoggedIn}) => {
                     <i className="far fa-thumbs-up" id={event._id} onClick={hitLike}></i>
                 }
                 <span> {event.likes.length + (event.likes.length === 1 ? " Like" : " Likes")}</span>
-                </div> : null }
+                </div> : null}
                 {/* <span> {event.registeredUsers.length} </span> */}
                 {/* {event} */}
                 {registerState ? 
@@ -122,6 +124,7 @@ const Event = ({event, isAdmin, isLiked, isRegistered, isLoggedIn}) => {
                 <div className="buttons">
                 <button className="links" id={event._id} onClick={handleEdit}>Edit</button>
                 <button className="links" id={event._id} onClick={handleDelete}>Delete</button>
+                <br></br>
                 </div>}
         </div>
     )
