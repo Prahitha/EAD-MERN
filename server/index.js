@@ -2,6 +2,8 @@ require('dotenv').config();
 const dbConnection = require('./config/database');
 const express = require('express');
 const app = require('express')();
+const path = require("path");
+app.use(express.static(path.join(__dirname, "client/src")));
 
 dbConnection().then(() => {
 
